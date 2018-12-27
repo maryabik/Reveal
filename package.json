@@ -57,7 +57,7 @@
     "typescript": "~3.1.6"
   },
   "engines": {
-    "node": "6.4.1",
+    "node": "6.5",
     "npm": "10.15.0"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.",
