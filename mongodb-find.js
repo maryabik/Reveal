@@ -19,6 +19,11 @@ client.connect(function(err) {
   const db = client.db(dbName);
 
 
- client.close();
-});
+// Insert multiple documents
+db.collection("user").find({username: "mary"}).toArray(function(err, r) {
+    assert.equal(null, err);
+    console.log(r);
 
+  client.close();
+});
+});

@@ -92,12 +92,13 @@
 
 
 
-// const express = require('express');
+const express = require('express');
 // const hbs = require('hbs');
 // const fs = require('fs');
 
-// const app = express();
+const app = express();
 // const port = process.env.PORT || 3000;
+const port = 4000;
 
 // hbs.registerPartials(__dirname + '/views/partials')
 // app.set('view engine', 'hbs');
@@ -115,11 +116,11 @@
 //   next();
 // });
 
-// // app.use((req, res, next) => {
-// //   res.render('maintenance.hbs');
-// // });
+// app.use((req, res, next) => {
+//   res.render('maintenance.hbs');
+// });
 
-// app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/src/app/mainpage.component'));
 
 // hbs.registerHelper('getCurrentYear', () => {
 //   return new Date().getFullYear();
@@ -149,6 +150,6 @@
 //   });
 // });
 
-// app.listen(port, () => {
-//   console.log('Server is up on port ${port} ');
-// });
+app.listen(port, () => {
+  console.log('Server is up on port ${port} ');
+});

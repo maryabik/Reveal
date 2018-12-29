@@ -18,7 +18,12 @@ client.connect(function(err) {
 
   const db = client.db(dbName);
 
+// Remove a single document
+db.collection('user').deleteOne({username: "mary"}, function(err, r) {
+    assert.equal(null, err);
+    assert.equal(1, r.deletedCount);
+
 
  client.close();
 });
-
+});
