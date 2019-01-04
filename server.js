@@ -8,19 +8,19 @@ let port = 3000;
 var app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+//app.use(bodyParser.urlencoded({extended: false}));
 
 
-app.post('/user', function(req,res)  {
+app.post('/users', function(req,res)  {
    var silence = new User({ 
          name: req.body.name,
          password: req.body.password,
-          email: req.body.email
+         email: req.body.email
      });
-     silence.save().then(doc, function (err, silence) {
+     silence.save().then(function (err, silence) {
           if (err) return console.error(err);
-          JSON.parse(sience);
-           console.log(silence); // 'Silence'
+          //JSON.parse(req.body);
+      console.log(silence); // 'Silence'
       
         });
      });  

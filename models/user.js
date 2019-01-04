@@ -24,17 +24,17 @@ var UserSchema = new mongoose.Schema({
 
   var User = mongoose.model('User', UserSchema);
 
-  var silence = new User({ 
-      name: 'Mary',
-      password: 'admin',
-      email: 'mary345@gmail.com'
- });
+//   var silence = new User({ 
+//       // name: 'Mary',
+//       // password: 'admin',
+//       // email: 'mary345@gmail.com'
+//  });
   
-  silence.save(function (err, silence) {
-    if (err) return console.error(err);
-    console.log(silence); // 'Silence'
+//   silence.save(function (err, silence) {
+//     if (err) return console.error(err);
+//     console.log(silence); // 'Silence'
 
-  });
+//   });
 
 //     var othersilence = new User({ 
 //         name: 'Maryme',
@@ -48,4 +48,4 @@ var UserSchema = new mongoose.Schema({
 
 // });
 
-//module.exports = {User};
+module.exports = {User};
