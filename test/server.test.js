@@ -4,49 +4,48 @@ const request = require('supertest');
 var assert = require('assert');
 
 var {mongoose} = require('./../DB/mongoose');
-var {User} = require('./../models/user');
+var {User} = require('./../models/User');
 var {app} = require ('./../server');
 
-// describe('Array', function() {
-//   describe('#indexOf()', function() {
-//     it('should return -1 when the value is not present', function() {
-//       assert.equal([1,2,3].indexOf(4), -1);
-//     });
-//   }); 
-// });
 
 beforeEach((done) => {
-    todos.deleteOne({}).then(() => done());
+    User.deleteOne({}).then(() => done());
   });
 
 // describe
-describe('POST /user', () => {
+describe('POST /users', () => {
+ 
   it('should create a new todo', (done) => {
-    var text = 'Test todo text';
+    setTimeout(done, 309);
+    var name = 'maryjjj';
+
 
     request(app)
-      .post('/todos')
-      .send({text})
+      .post('/users')
+      .send({name})
       .expect(200)
       .expect((res) => {
-        expect(res.body.text).toBe(text);
+        expect(res.body.name).toBe(name);
+        
+
       })
       .end((err, res) => {
         if (err) {
           return done(err);
         }
 
-        Todo.find().then((User) => {
-          expect(todos.length).toBe(1);
-          expect(todos[0].text).toBe(text);
+        User.find().then((users) => {
+          expect(users.length).toBe(1);
+          expect(users[0].name).toBe(name);
           done();
         }).catch((e) => done(e));
       });
   });
 
   it('should not create todo with invalid body data', (done) => {
+    setTimeout(done, 309);
     request(app)
-      .post('/todos')
+      .post('/users')
       .send({})
       .expect(400)
       .end((err, res) => {
@@ -54,8 +53,8 @@ describe('POST /user', () => {
           return done(err);
         }
 
-        Todo.find().then((todos) => {
-          expect(todos.length).toBe(0);
+        User.find().then((todos) => {
+          expect(users.length).toBe(0);
           done();
         }).catch((e) => done(e));
       });

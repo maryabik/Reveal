@@ -14,12 +14,11 @@ app.use(bodyParser.json());
 app.post('/users', function(req,res)  {
    var silence = new User({ 
          name: req.body.name,
-         password: req.body.password,
-         email: req.body.email
+         // password: req.body.password,
+         // email: req.body.email
      });
      silence.save().then(function (err, silence) {
           if (err) return console.error(err);
-          //JSON.parse(req.body);
       console.log(silence); // 'Silence'
       
         });
