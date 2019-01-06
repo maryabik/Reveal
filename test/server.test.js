@@ -8,15 +8,23 @@ var {User} = require('./../models/User');
 var {app} = require ('./../server');
 
 
+const users = [{
+  name: 'First'
+}, {
+  name: 'Second'
+}];
+
 beforeEach((done) => {
-    User.deleteOne({}).then(() => done());
-  });
+  User.deleteOne({}).then(() => {
+    return User.insertMany(users);
+  }).then(() => done());
+});
 
 // describe
 describe('POST /users', () => {
  
   it('should create a new todo', (done) => {
-    setTimeout(done, 309);
+    setTimeout(done, 2000);
     var name = 'maryjjj';
 
 
@@ -34,7 +42,7 @@ describe('POST /users', () => {
           return done(err);
         }
 
-        User.find().then((users) => {
+        User.find({name}).then((users) => {
           expect(users.length).toBe(1);
           expect(users[0].name).toBe(name);
           done();
@@ -43,7 +51,7 @@ describe('POST /users', () => {
   });
 
   it('should not create todo with invalid body data', (done) => {
-    setTimeout(done, 309);
+    setTimeout(done, 2000);
     request(app)
       .post('/users')
       .send({})
@@ -53,10 +61,23 @@ describe('POST /users', () => {
           return done(err);
         }
 
-        User.find().then((todos) => {
-          expect(users.length).toBe(0);
+        User.find().then((users) => {
+          expect(users.length).toBe(2);
           done();
         }).catch((e) => done(e));
       });
+  });
+});
+
+describe('GET /users', () => {
+  it('should get all users', (done) => {
+    setTimeout(done, 2000);
+    request(app)
+      .get('/users')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.users.length).toBe(2);
+      })
+      .end(done);
   });
 });
