@@ -137,3 +137,26 @@ describe('GET /users/:id', () => {
       .end(done);
   });
 });
+
+describe('DELETE /users', () => {
+  it('should remove a user', (done) => {
+  setTimeout(done, 2000);
+    request(app)
+      .get('/users')
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.users.length).toBe(2);
+      })
+      .end(done);
+  });
+  it('should return a user', (done) => {
+    setTimeout(done, 2000);
+      request(app)
+        .get('/users')
+        .expect(200)
+        .expect((res) => {
+          expect(res.body.users.length).toBe(2);
+        })
+        .end(done);
+    });
+});
