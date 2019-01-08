@@ -76,7 +76,7 @@ describe('GET /users', () => {
       .get('/users')
       .expect(200)
       .expect((res) => {
-        expect(res.body.users.length).toBe(2);
+        expect(res.body.users.length).toBe(5);
       })
       .end(done);
   });
