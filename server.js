@@ -4,9 +4,9 @@ var {ObjectID} = require('mongodb');
 
 var {mongoose} = require('./DB/mongoose');
 var {User} = require('./models/User');
-let port = 3000;
 
 var app = express();
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({extended: false}));
@@ -55,8 +55,7 @@ app.post('/users', function(req,res)  {
     //     res.send(req.params)});
      
      app.listen(port, () => {
-     console.log('Server is up on port ' + port );
+     console.log('Server is up on ' + [ port] );
       });
 
-      
       module.exports = {app};

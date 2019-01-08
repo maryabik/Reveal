@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
-    "test": "node ./node_modules/mocha/bin/mocha --timeout 10000",
-    "test-watch":"nodemon --exec 'npm test' ",
+    "test": "node ./node_modules/mocha/bin/mocha --timeout 20000",
+    "test-watch": "nodemon --exec 'npm test' ",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
