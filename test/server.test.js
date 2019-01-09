@@ -32,11 +32,14 @@ const users = [{
 //   const db = client.db(dbName);
 
   beforeEach(function(done) {
-      User.deleteOne({})
+       User.deleteOne({})
       .then(function() {
         return User.insertMany(users),
-        done();  })
-  });
+              //assert.equal(null, err);
+              //assert.equal(1, users.deletedCount);
+              done();});
+  
+});
 
 
 // // Remove a single document
@@ -58,7 +61,7 @@ const users = [{
 describe('POST /users', () => {
   it('should create a new todo', (done) => {
     setTimeout(done, 2000);
-    var name = 'maryjjj';
+    var name = 'maryj';
     request(app)
       .post('/users')
       .send({name})
@@ -71,8 +74,9 @@ describe('POST /users', () => {
           return done(err);
         }
         User.find({name}).then((users) => {
+          //expect(users[0].name).toBe(name);
+          expect(users.name).toBeNull();
           expect(users.length).toBe(1);
-          expect(users[0].name).toBe(name);
           done();
         }).catch((e) => done(e));
       });
@@ -152,11 +156,29 @@ describe('DELETE /users', () => {
   it('should return a user', (done) => {
     setTimeout(done, 2000);
       request(app)
-        .get('/users')
+        .get(`/users`)
         .expect(200)
         .expect((res) => {
           expect(res.body.users.length).toBe(2);
         })
         .end(done);
     });
+});
+
+describe('PATCH /users/:id', () => {
+  it('should update the user', (done) => {
+  setTimeout(done, 2000);
+  var hexId = new ObjectID().toHexString();
+  var name = "new name"
+    request(app)
+      .patch(`/users/${hexId}`)
+      .send({
+        name
+      })
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.user.name).toBe(name);
+      })
+      .end(done);
+  });
 });

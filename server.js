@@ -1,6 +1,12 @@
+require('./config/config');
+var env = process.env.NODE_ENV || 'development';
+
+
+
+const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
-var {ObjectID} = require('mongodb');
+const {ObjectID} = require('mongodb');
 
 var {mongoose} = require('./DB/mongoose');
 var {User} = require('./models/User');
@@ -69,7 +75,39 @@ app.post('/users', function(req,res)  {
       });
     });
     
+    app.patch('/users/:id', (req, res) => {
+      var id = req.params.id;
+      var body = _.pick(req.body, ['name', 'email']);
+    
+      if (!ObjectID.isValid(id)) {
+        return res.status(404).send();
+      }
+User.findOneAndUpdate(
+  id, 
+  {$set: body}, {
+    new:true}
+, function(err, user) {
+  if (!user) {
+          return res.status(404).send();
+        }
+    
+        res.send({user});
+      }).catch((e) => {
+        res.status(400).send();
+      })
+});
 
+    
+    //   Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
+    //     if (!todo) {
+    //       return res.status(404).send();
+    //     }
+    //     res.send({todo});
+    //   }).catch((e) => {
+    //     res.status(400).send();
+    //   })
+    // });
+    
     // app.get('/users/:id', (req, res) => {
     //     res.send(req.params)});
      
